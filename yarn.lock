@@ -2037,6 +2037,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
+
 cssom@^0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/cssom/-/cssom-0.4.4.tgz#5a66cf93d2d0b661d80bf6a44fb65f5c2e4e0a10"
@@ -5030,7 +5035,6 @@ pg-connection-string@2.2.0:
   resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.2.0.tgz#caab4d38a9de4fdc29c9317acceed752897de41c"
   integrity sha512-xB/+wxcpFipUZOQcSzcgkjcNOosGhEoPSjz06jC89lv1dj7mc9bZv6wLVy8M2fVjP0a/xN0N988YDq1L0FhK3A==
 
-<<<<<<< HEAD
 pg-connection-string@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.2.3.tgz#48e1158ec37eaa82e98dbcb7307103ec303fe0e7"
@@ -5083,8 +5087,6 @@ pgpass@1.x:
   dependencies:
     split "^1.0.0"
 
-=======
->>>>>>> f485569ff3c4ba08ef60f67e103bcf6ecd4075aa
 picomatch@^2.0.4, picomatch@^2.0.5:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
