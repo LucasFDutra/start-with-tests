@@ -175,3 +175,4 @@ export default new App().express;
 ```
 
 Pronto, ao fazer isso já isolamos a aplicação do servidor, e para rodar os testes não é mais necessário subir todo o servidor.
+
