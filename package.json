@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prod": "tsc",
-    "dev": "NODE_ENV=dev ts-node-dev --respawn --transpileOnly src/server.ts --ignore-watch *.test.ts",
-    "pretest": "NODE_ENV=dev knex migrate:latest",
-    "test": "NODE_ENV=dev jest",
-    "posttest": "NODE_ENV=dev knex migrate:rollback --all"
+    "prod": "NODE_ENV=production tsc",
+    "dev": "NODE_ENV=development ts-node-dev --respawn --transpileOnly src/server.ts --ignore-watch *.test.ts",
+    "pretest": "NODE_ENV=development knex migrate:latest",
+    "test": "NODE_ENV=development jest",
+    "posttest": "NODE_ENV=development knex migrate:rollback --all"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

@@ -6,5 +6,6 @@
             "name": "sqlite_teste",
             "previewLimit": 50
         }
-    ]
+    ],
+    "sqltools.useNodeRuntime": true
 }

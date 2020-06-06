@@ -1,10 +1,9 @@
-// Update with your config settings.
 import dotenv from 'dotenv';
 
 dotenv.config({
   path: '.env',
 });
-
+console.log(process.env.NODE_ENV);
 module.exports = {
   development: {
     client: 'sqlite3',
