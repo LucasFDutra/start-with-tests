@@ -512,3 +512,138 @@ Ao rodarmos o comando `yarn test` veremos o seguinte
 Esse quadro é o resultado do coverage que o jest faz. ele indica o quanto dos nossos arquivos foram testados. mas se abrirmos o arquivo `__tests__/coverage/lcov-report/index.html` no nosso navegador poderemos ter muito mais informações de coverage, até mesmo a informação de que linha não foi testada.
 
 <img src='./img/fig002.gif' />
+
+
+As libs necessárias são:
+```shell
+$ yarn add validate.js
+$ yarn add bcryptjs
+$ yarn add --dev @types/bcryptjs
+$ yarn add cors
+$ yarn add --dev @types/cors
+$ yarn add crypto
+$ yarn add express
+$ yarn add --dev @types/express
+```
+
+A aplicação em sí bate na rota `/` com um método post, passando um body com nome, email e senha para o controller e o controller valida e passa isso para o model adicionar o usuário ao banco.
+
+# Os testes
+Vamos adicionar dois testes. Um dentro da pasta controller e outro dentro da pasta model, o nome deles é identico ao do arquivo que vai testar, mas com o .test no nome
+
+Para rodar os testes utilize a lib supertest e a faker,  supertest permite utilizarmos os métodos http e a faker fornece inputs fake para os testes.
+
+```shell
+$ yarn add --dev faker
+$ yarn add --dev @types/faker
+$ yarn add --dev supertest
+$ yarn add --dev @types/supertest
+```
+
+Uma coisa importante é criar dentro do model uma função que limpa a tablea (o que já existe), para que sempre antes de cada teste essa função limpe a base, assim evitando qualquer problema caso o rollback da migration não ocorra.
+
+- Arquivo `UsersController.test.ts`
+```TypeScript
+import request from 'supertest';
+import faker from 'faker';
+import app from '../app';
+import UsersModel from '../models/UsersModel';
+
+const clearTable = () => {
+  UsersModel.dropTable();
+};
+
+describe('Create user', () => {
+  beforeEach(clearTable);
+  // send manda um body, para mandar um header utilize o set
+  it('create a valid user', async () => {
+    const response = await request(app).post('/users').send({
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    });
+
+    expect(response.status).toBe(200);
+  });
+
+  it('create an invalid user', async () => {
+    const response = await request(app).post('/users').send({
+      name: faker.name.findName(),
+      email: faker.name.findName(),
+      password: faker.internet.password(),
+    });
+
+    expect(response.status).toBe(400);
+  });
+
+  it('create an invalid user without name', async () => {
+    const response = await request(app).post('/users').send({
+      email: faker.name.findName(),
+      password: faker.internet.password(),
+    });
+
+    expect(response.status).toBe(400);
+  });
+});
+
+```
+
+
+- Arquivo `UsersModel.test.ts`
+```TypeScript
+import bcrypt from 'bcryptjs';
+import faker from 'faker';
+import UsersModel from './UsersModel';
+
+const clearTable = () => {
+  UsersModel.dropTable();
+};
+
+describe('User', () => {
+  beforeEach(clearTable);
+
+  it('should create an new user', async () => {
+    const body = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(true);
+  });
+
+  it('error in create an new user missing email', async () => {
+    const body = {
+      name: faker.name.findName(),
+      password: faker.internet.password(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(false);
+  });
+
+  it('error in create an new user missing name', async () => {
+    const body = {
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(false);
+  });
+
+  it('should create an new user missing password', async () => {
+    const body = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(false);
+  });
+});
+```
+
+Ao rodarmos o comando `yarn test` veremos o seguinte
+<img src='./img/fig001.png' />
+
+Esse quadro é o resultado do coverage que o jest faz. ele indica o quanto dos nossos arquivos foram testados. mas se abrirmos o arquivo `__tests__/coverage/lcov-report/index.html` no nosso navegador poderemos ter muito mais informações de coverage, até mesmo a informação de que linha não foi testada.
+
+<img src='./img/fig002.gif' />
