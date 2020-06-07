@@ -1,5 +1,5 @@
 # Objetivo
-Vou desenvolver uma aplicação typescript super simples, para fazer autenticação, para então criar os testes.
+Vou desenvolver uma aplicação typescript super simples, para inserir um usuário no banco de dados.
 
 Para fazer todo o desenvolvimento (apenas para praticar) vou fazer uma máquina docker, mas é opcional. Caso queira seguir utilzando docker também veja esse outro tutorial [aqui](https://github.com/LucasFDutra/start-with-docker). E caso tenha problemas/duvidas com typescript, veja esse [aqui](https://github.com/LucasFDutra/start-with-TypeScript)
 
@@ -73,7 +73,7 @@ mas podemos configurar dentro do package.json um script.
   },
 ```
 
-Sendo assim, para rodar os teste basta digitar 
+Sendo assim, para rodar os teste basta digitar
 ```shell
 $ yarn test
 ```

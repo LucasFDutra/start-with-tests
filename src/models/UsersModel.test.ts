@@ -1,15 +1,48 @@
+import bcrypt from 'bcryptjs';
+import faker from 'faker';
 import UsersModel from './UsersModel';
 
-describe('Authetication', () => {
-  it('valid insertion of an new user', async () => {
+const clearTable = () => {
+  UsersModel.dropTable();
+};
+
+describe('User', () => {
+  beforeEach(clearTable);
+
+  it('should create an new user', async () => {
     const body = {
-      name: 'Lucas',
-      email: 'lucasfelipedutra@gmail.com',
-      password: '1234',
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
     };
 
-    const status = await UsersModel.insertUser(body);
+    expect(await UsersModel.insertUser(body)).toBe(true);
+  });
 
-    expect(status).toBe(true);
+  it('error in create an new user missing email', async () => {
+    const body = {
+      name: faker.name.findName(),
+      password: faker.internet.password(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(false);
+  });
+
+  it('error in create an new user missing name', async () => {
+    const body = {
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(false);
+  });
+
+  it('should create an new user missing password', async () => {
+    const body = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+    };
+
+    expect(await UsersModel.insertUser(body)).toBe(false);
   });
 });

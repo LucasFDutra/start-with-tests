@@ -4,9 +4,9 @@
 module.exports = {
   bail: true,
   clearMocks: true,
-  // collectCoverage: true,
-  // collectCoverageFrom: ["src/**"],
-  // coverageDirectory: "__tests__",
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**'],
+  coverageDirectory: '__tests__/coverage',
   testEnvironment: 'node',
   testMatch: [
     '**/?(*.)+(spec|test).[jt]s?(x)',

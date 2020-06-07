@@ -14,10 +14,10 @@ class UserModel {
     const { email } = body;
     const { password } = body;
 
-    const id = crypto.randomBytes(8).toString('hex');
-    const password_hash = await bcrypt.hash(password, 10);
-
     try {
+      const id = crypto.randomBytes(8).toString('hex');
+      const password_hash = await bcrypt.hash(password, 10);
+
       const value = await connection('users').insert({
         id,
         name,
@@ -28,6 +28,10 @@ class UserModel {
     } catch (error) {
       return false;
     }
+  };
+
+  public dropTable = async () => {
+    await connection('users').del();
   }
 }
 

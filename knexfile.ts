@@ -3,12 +3,22 @@ import dotenv from 'dotenv';
 dotenv.config({
   path: '.env',
 });
-console.log(process.env.NODE_ENV);
+
 module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
       filename: './src/database/database.sqlite',
+    },
+    migrations: {
+      directory: './src/database/migrations',
+    },
+  },
+
+  test: {
+    client: 'sqlite3',
+    connection: {
+      filename: './__tests__/database/database.sqlite',
     },
     migrations: {
       directory: './src/database/migrations',
