@@ -43,7 +43,7 @@ module.exports = {
   clearMocks: true,
   collectCoverage: true,
   collectCoverageFrom: ["src/**"],
-  coverageDirectory: "__tests__",
+  coverageDirectory: "./coverage",
   testEnvironment: "node",
   testMatch: [
     "**/?(*.)+(spec|test).[jt]s?(x)"
@@ -509,6 +509,6 @@ describe('User', () => {
 Ao rodarmos o comando `yarn test` veremos o seguinte
 <img src='./img/fig001.png' />
 
-Esse quadro é o resultado do coverage que o jest faz. ele indica o quanto dos nossos arquivos foram testados. mas se abrirmos o arquivo `__tests__/coverage/lcov-report/index.html` no nosso navegador poderemos ter muito mais informações de coverage, até mesmo a informação de que linha não foi testada.
+Esse quadro é o resultado do coverage que o jest faz. ele indica o quanto dos nossos arquivos foram testados. mas se abrirmos o arquivo `coverage/lcov-report/index.html` no nosso navegador poderemos ter muito mais informações de coverage, até mesmo a informação de que linha não foi testada.
 
 <img src='./img/fig002.gif' />
